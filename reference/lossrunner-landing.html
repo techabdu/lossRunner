@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>LossRunner by HAQ — stop chasing carriers for loss runs</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=Hanken+Grotesk:wght@400;500;600&display=swap" rel="stylesheet" />
+<style>
+  :root{
+    --paper:#f4f0e7;
+    --paper-2:#ece6d8;
+    --ink:#1c1b17;
+    --ink-soft:#4d4a40;
+    --ink-faint:#85806f;
+    --line:#d8d1bf;
+    --accent:#0f6e56;
+    --accent-deep:#0a4d3c;
+    --clay:#b9532e;
+    --radius:14px;
+    --display:"Fraunces",Georgia,serif;
+    --body:"Hanken Grotesk",-apple-system,sans-serif;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{
+    font-family:var(--body);
+    background:var(--paper);
+    color:var(--ink);
+    line-height:1.6;
+    -webkit-font-smoothing:antialiased;
+    overflow-x:hidden;
+  }
+  .wrap{max-width:1080px;margin:0 auto;padding:0 28px}
+  a{color:inherit;text-decoration:none}
+
+  /* nav */
+  nav{position:sticky;top:0;z-index:50;background:rgba(244,240,231,.82);backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+  .nav-in{display:flex;align-items:center;justify-content:space-between;height:68px}
+  .brand{display:flex;align-items:baseline;gap:9px;font-family:var(--display);font-weight:600;font-size:21px;letter-spacing:-.01em}
+  .brand small{font-family:var(--body);font-weight:500;font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-faint)}
+  .btn{display:inline-flex;align-items:center;gap:8px;font-family:var(--body);font-weight:500;font-size:15px;padding:11px 20px;border-radius:999px;transition:transform .18s ease,background .18s ease,box-shadow .18s ease;cursor:pointer;border:none}
+  .btn-primary{background:var(--accent);color:#f4f0e7}
+  .btn-primary:hover{background:var(--accent-deep);transform:translateY(-1px);box-shadow:0 8px 22px -10px rgba(15,110,86,.7)}
+  .btn-ghost{border:1px solid var(--ink);color:var(--ink);background:transparent}
+  .btn-ghost:hover{background:var(--ink);color:var(--paper)}
+  .nav-in .btn{padding:9px 18px;font-size:14px}
+
+  /* hero */
+  header{padding:78px 0 64px;position:relative}
+  .eyebrow{display:inline-flex;align-items:center;gap:8px;font-size:13px;font-weight:500;letter-spacing:.04em;color:var(--accent-deep);background:rgba(15,110,86,.1);padding:6px 14px;border-radius:999px;margin-bottom:26px}
+  .dot{width:7px;height:7px;border-radius:50%;background:var(--accent);display:inline-block}
+  h1{font-family:var(--display);font-weight:600;font-size:clamp(40px,6.4vw,68px);line-height:1.02;letter-spacing:-.02em;max-width:14ch}
+  h1 em{font-style:italic;color:var(--accent-deep)}
+  .lede{font-size:clamp(18px,2.1vw,21px);color:var(--ink-soft);max-width:54ch;margin:26px 0 34px}
+  .cta-row{display:flex;gap:14px;flex-wrap:wrap;align-items:center}
+  .micro{font-size:13.5px;color:var(--ink-faint);margin-top:18px}
+  .reveal{opacity:0;transform:translateY(16px);animation:rise .8s cubic-bezier(.2,.7,.2,1) forwards}
+  @keyframes rise{to{opacity:1;transform:none}}
+  .d1{animation-delay:.05s}.d2{animation-delay:.16s}.d3{animation-delay:.28s}.d4{animation-delay:.4s}.d5{animation-delay:.52s}
+
+  /* the grind strip */
+  .grind{background:var(--ink);color:var(--paper);padding:18px 0}
+  .grind-in{display:flex;flex-wrap:wrap;gap:10px 34px;align-items:center;justify-content:center;font-size:14.5px;color:#cfc9b8}
+  .grind-in b{color:var(--paper);font-weight:500}
+  .grind-in span{display:inline-flex;align-items:center;gap:9px}
+  .grind .pin{color:var(--clay)}
+
+  /* sections */
+  section{padding:84px 0}
+  .kicker{font-size:13px;font-weight:600;letter-spacing:.16em;text-transform:uppercase;color:var(--clay);margin-bottom:16px}
+  h2{font-family:var(--display);font-weight:500;font-size:clamp(28px,4vw,42px);line-height:1.08;letter-spacing:-.015em;max-width:20ch}
+  .sub{font-size:18px;color:var(--ink-soft);max-width:58ch;margin-top:18px}
+
+  /* pain cards */
+  .pain-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:18px;margin-top:46px}
+  .pcard{background:var(--paper-2);border:1px solid var(--line);border-radius:var(--radius);padding:26px 24px}
+  .pcard .n{font-family:var(--display);font-size:36px;font-weight:600;color:var(--accent-deep);line-height:1}
+  .pcard p{margin-top:12px;font-size:15.5px;color:var(--ink-soft)}
+
+  /* how it works */
+  .steps{margin-top:50px;display:grid;gap:0}
+  .step{display:grid;grid-template-columns:64px 1fr;gap:24px;padding:26px 0;border-top:1px solid var(--line);align-items:start}
+  .step:last-child{border-bottom:1px solid var(--line)}
+  .step .idx{font-family:var(--display);font-size:30px;font-weight:600;color:var(--accent)}
+  .step h3{font-family:var(--body);font-weight:600;font-size:19px;letter-spacing:-.01em}
+  .step p{font-size:16px;color:var(--ink-soft);margin-top:5px;max-width:60ch}
+  .step .tag{display:inline-block;margin-top:9px;font-size:12.5px;font-weight:500;color:var(--accent-deep);background:rgba(15,110,86,.1);padding:3px 11px;border-radius:999px}
+
+  /* return band */
+  .ret{background:var(--accent-deep);color:#eaf3ee}
+  .ret h2{color:#fff;max-width:24ch}
+  .ret .sub{color:#bfe0d4}
+  .ret-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:36px;margin-top:48px}
+  .ret-item .big{font-family:var(--display);font-size:clamp(30px,4vw,40px);font-weight:600;color:#fff;line-height:1}
+  .ret-item p{margin-top:10px;color:#bfe0d4;font-size:15.5px}
+
+  /* who */
+  .who-grid{display:grid;grid-template-columns:1.1fr .9fr;gap:54px;align-items:center}
+  .who ul{list-style:none;margin-top:26px}
+  .who li{padding:13px 0;border-bottom:1px solid var(--line);font-size:16.5px;display:flex;gap:13px;align-items:flex-start}
+  .who li::before{content:"";flex-shrink:0;margin-top:9px;width:7px;height:7px;border-radius:50%;background:var(--accent)}
+  .note{background:var(--paper-2);border:1px solid var(--line);border-left:4px solid var(--clay);border-radius:0 var(--radius) var(--radius) 0;padding:28px}
+  .note .q{font-family:var(--display);font-size:21px;font-weight:500;line-height:1.3;letter-spacing:-.01em}
+  .note p{margin-top:14px;font-size:15.5px;color:var(--ink-soft)}
+
+  /* cta */
+  .final{text-align:center;padding:96px 0}
+  .final h2{margin:0 auto;max-width:18ch}
+  .final .sub{margin:18px auto 0}
+  .form{display:flex;gap:12px;max-width:480px;margin:38px auto 0;flex-wrap:wrap;justify-content:center}
+  .form input{flex:1;min-width:220px;font-family:var(--body);font-size:16px;padding:14px 18px;border-radius:999px;border:1px solid var(--line);background:#fff;color:var(--ink);outline:none}
+  .form input:focus{border-color:var(--accent)}
+  .or{margin-top:18px;font-size:14px;color:var(--ink-faint)}
+
+  footer{border-top:1px solid var(--line);padding:34px 0;font-size:13.5px;color:var(--ink-faint)}
+  .foot-in{display:flex;justify-content:space-between;flex-wrap:wrap;gap:14px;align-items:center}
+
+  @media(max-width:760px){
+    .who-grid{grid-template-columns:1fr;gap:34px}
+    section{padding:62px 0}
+    header{padding:54px 0 48px}
+    .step{grid-template-columns:46px 1fr;gap:16px}
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="wrap nav-in">
+    <div class="brand">LossRunner <small>by HAQ</small></div>
+    <a class="btn btn-primary" href="https://calendly.com/your-haq-link/15min">Book a 15-min call</a>
+  </div>
+</nav>
+
+<header>
+  <div class="wrap">
+    <span class="eyebrow reveal d1"><span class="dot"></span> For independent commercial P&amp;C agencies</span>
+    <h1 class="reveal d2">Stop chasing carriers for <em>loss runs</em>.</h1>
+    <p class="lede reveal d3">Every renewal, someone on your team requests the client's claims history, then babysits the carrier's inbox for two weeks until it shows up. LossRunner does the whole errand on its own — and only pings a human when something's actually stuck.</p>
+    <div class="cta-row reveal d4">
+      <a class="btn btn-primary" href="https://calendly.com/your-haq-link/15min">Book a 15-min call</a>
+      <a class="btn btn-ghost" href="#how">See how it works</a>
+    </div>
+    <p class="micro reveal d5">We're building this with a small group of agencies right now. Early partners shape what gets built — and lock in founding pricing.</p>
+  </div>
+</header>
+
+<div class="grind">
+  <div class="wrap grind-in">
+    <span><i class="pin">●</i> <b>1–2 weeks</b> to get one loss run back</span>
+    <span><i class="pin">●</i> <b>Every</b> renewal &amp; new-business quote</span>
+    <span><i class="pin">●</i> Lives in <b>email, portals &amp; fax</b></span>
+    <span><i class="pin">●</i> Done <b>by hand</b> at ~36,000 US agencies</span>
+  </div>
+</div>
+
+<section>
+  <div class="wrap">
+    <p class="kicker">The part of the job nobody fights over</p>
+    <h2>You didn't get your license to play phone tag with underwriting desks.</h2>
+    <p class="sub">Loss-run retrieval is invisible until it's late — and then it stalls a quote, annoys a producer, and puts a renewal at risk. It's the kind of work that's too fiddly to standardize and too constant to ignore.</p>
+    <div class="pain-grid">
+      <div class="pcard"><div class="n">×100s</div><p>Requests a year for a mid-size book, each needing a different carrier's portal, email alias, or form.</p></div>
+      <div class="pcard"><div class="n">2 wks</div><p>Typical wait, full of follow-ups — the single slowest step in prepping a renewal submission.</p></div>
+      <div class="pcard"><div class="n">$0</div><p>Software your team has for this today. It's a human suspense list and a lot of "just circling back."</p></div>
+    </div>
+  </div>
+</section>
+
+<section id="how" style="background:var(--paper-2)">
+  <div class="wrap">
+    <p class="kicker">How it works</p>
+    <h2>One agent runs the whole errand, start to finish.</h2>
+    <div class="steps">
+      <div class="step"><div class="idx">01</div><div><h3>It sees the renewal coming</h3><p>A renewal hits the 60-day window, or a producer forwards a request. LossRunner picks it up the moment it lands — nothing sits in a queue.</p></div></div>
+      <div class="step"><div class="idx">02</div><div><h3>It knows how to ask each carrier</h3><p>It identifies the prior carrier and the exact way that carrier wants the request — portal, email, or form — and attaches the letter of authorization.<span class="tag">The part we go deep on</span></p></div></div>
+      <div class="step"><div class="idx">03</div><div><h3>It sends, then follows up on its own</h3><p>Polite, on a schedule, without anyone reminding it. It escalates to your team only if a request actually goes cold.</p></div></div>
+      <div class="step"><div class="idx">04</div><div><h3>It checks what comes back</h3><p>Right client, right policy, right loss period, all years present. No more discovering a gap the day before the proposal is due.</p></div></div>
+      <div class="step"><div class="idx">05</div><div><h3>It files it and tells you it's ready</h3><p>The loss run lands where your team already keeps records, and the account manager gets a clean "ready for review."</p></div></div>
+    </div>
+  </div>
+</section>
+
+<section class="ret">
+  <div class="wrap">
+    <p class="kicker" style="color:#7fc9b1">What you get back</p>
+    <h2>Quieter renewals, faster quotes, and hours your team can sell with.</h2>
+    <p class="sub">Same people, more bandwidth — pointed at clients instead of carrier inboxes.</p>
+    <div class="ret-grid">
+      <div class="ret-item"><div class="big">Hours/week</div><p>Returned to your account managers, off the suspense list and back on service and rounding.</p></div>
+      <div class="ret-item"><div class="big">Days faster</div><p>To a complete submission, because the slowest step starts itself the moment a renewal appears.</p></div>
+      <div class="ret-item"><div class="big">Fewer slips</div><p>No renewal quietly drifting because a loss run got forgotten in a busy week.</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="who">
+  <div class="wrap who-grid">
+    <div>
+      <p class="kicker">Who it's for</p>
+      <h2>Built for the agencies the big platforms ignore.</h2>
+      <ul>
+        <li>Independent &amp; small commercial P&amp;C agencies</li>
+        <li>Account managers &amp; CSRs drowning in carrier follow-ups</li>
+        <li>Agencies on any AMS — we fit your workflow, not the reverse</li>
+        <li>Teams that want to grow the book without growing the back office</li>
+      </ul>
+    </div>
+    <div class="note">
+      <p class="q">"The process is so time-consuming, people just end up not doing it well."</p>
+      <p>We've heard a version of this from every agency we've talked to. If it sounds like your Mondays, we'd like 15 minutes to hear how you handle it today — whether or not you ever use what we build.</p>
+    </div>
+  </div>
+</section>
+
+<section class="final">
+  <div class="wrap">
+    <p class="kicker" style="color:var(--clay)">Founding partners</p>
+    <h2>Tell us how you chase loss runs today.</h2>
+    <p class="sub">We're picking a handful of agencies to build alongside. Early partners get founding pricing and a direct line into the roadmap.</p>
+    <div class="form">
+      <input id="email" type="email" placeholder="you@youragency.com" aria-label="Your work email" />
+      <button class="btn btn-primary" id="joinBtn">Get early access</button>
+    </div>
+    <p class="or">Rather just talk? <a href="https://calendly.com/your-haq-link/15min" style="color:var(--accent-deep);text-decoration:underline">Book a 15-minute call →</a></p>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap foot-in">
+    <span>© <span id="yr"></span> HAQ — LossRunner is a working name.</span>
+    <span>hello@haq.example · Built for independent agencies.</span>
+  </div>
+</footer>
+
+<script>
+  document.getElementById('yr').textContent = new Date().getFullYear();
+  document.getElementById('joinBtn').addEventListener('click', function(){
+    var v = document.getElementById('email').value.trim();
+    var subj = encodeURIComponent('Early access — LossRunner');
+    var body = encodeURIComponent('Hi HAQ team,\n\nWe chase loss runs like this today:\n\n[ a few words ]\n\nAgency: \nName: \n\n— sent from your work email: ' + v);
+    window.location.href = 'mailto:hello@haq.example?subject=' + subj + '&body=' + body;
+  });
+</script>
+</body>
+</html>
