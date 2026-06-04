@@ -14,10 +14,10 @@ type RevealProps = {
 /**
  * Scroll-reveal wrapper. Fades/slides its children in once, the first time
  * they enter the viewport (IntersectionObserver, one-shot). Honors
- * prefers-reduced-motion and degrades gracefully: the hidden initial state
- * is gated behind `.js` in globals.css, and a safety timer reveals content
- * even if the observer never fires. Styling lives in globals.css
- * (.reveal-on-scroll / .is-visible).
+ * prefers-reduced-motion and degrades gracefully: the hidden initial state is
+ * gated behind `@media (scripting: enabled)` in globals.css (so content shows
+ * without JS), and browsers lacking IntersectionObserver reveal immediately.
+ * Styling lives in globals.css (.reveal-on-scroll / .is-visible).
  */
 export function Reveal({
   children,

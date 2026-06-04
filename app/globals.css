@@ -78,18 +78,21 @@ body {
 
 /* ───────────────────────── Scroll reveal ─────────────────────────
    Driven by components/ui/Reveal.tsx (IntersectionObserver toggles
-   .is-visible). The hidden initial state is gated behind `.js` (set by a
-   pre-paint inline script in layout.tsx) so content stays visible when
-   JavaScript is unavailable. One unified motion system for hero + sections. */
-.js .reveal-on-scroll {
-  opacity: 0;
-  transform: translateY(16px);
-  transition: opacity 0.7s var(--ease), transform 0.7s var(--ease);
-  will-change: opacity, transform;
-}
-.js .reveal-on-scroll.is-visible {
-  opacity: 1;
-  transform: none;
+   .is-visible). The hidden initial state is gated behind `scripting: enabled`
+   so content stays visible when JavaScript is unavailable — pure CSS, no
+   pre-paint script (and so no hydration mismatch on <html>). One unified
+   motion system for hero + sections. */
+@media (scripting: enabled) {
+  .reveal-on-scroll {
+    opacity: 0;
+    transform: translateY(16px);
+    transition: opacity 0.7s var(--ease), transform 0.7s var(--ease);
+    will-change: opacity, transform;
+  }
+  .reveal-on-scroll.is-visible {
+    opacity: 1;
+    transform: none;
+  }
 }
 
 /* ───────────────────────── Cinematic gradients ───────────────────
@@ -151,7 +154,7 @@ body {
   .mock-pulse {
     animation: none !important;
   }
-  .js .reveal-on-scroll {
+  .reveal-on-scroll {
     opacity: 1;
     transform: none;
     transition: none;

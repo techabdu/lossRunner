@@ -30,15 +30,7 @@ export default function RootLayout({
 }: Readonly<{ children: React.ReactNode }>) {
   return (
     <html lang="en" className={inter.variable}>
-      <body className="bg-[var(--bg)]">
-        {/* Pre-paint flag so scroll-reveal only hides content when JS is on */}
-        <script
-          dangerouslySetInnerHTML={{
-            __html: "document.documentElement.classList.add('js')",
-          }}
-        />
-        {children}
-      </body>
+      <body className="bg-[var(--bg)]">{children}</body>
     </html>
   );
 }
