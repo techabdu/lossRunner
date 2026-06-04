@@ -118,8 +118,37 @@ body {
   background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
 }
 
+/* ───────────────────────── Product mockup ────────────────────────
+   Subtle life for the hero "loss-run inbox" (components/ui/InboxMock). */
+@keyframes gentle-float {
+  from {
+    transform: translateY(0);
+  }
+  to {
+    transform: translateY(-10px);
+  }
+}
+@keyframes soft-pulse {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.35;
+  }
+}
+.mock-float {
+  animation: gentle-float 6s var(--ease) infinite alternate;
+  will-change: transform;
+}
+.mock-pulse {
+  animation: soft-pulse 1.6s ease-in-out infinite;
+}
+
 @media (prefers-reduced-motion: reduce) {
-  .aurora-orb {
+  .aurora-orb,
+  .mock-float,
+  .mock-pulse {
     animation: none !important;
   }
   .js .reveal-on-scroll {

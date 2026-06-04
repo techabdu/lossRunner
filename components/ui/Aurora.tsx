@@ -65,29 +65,34 @@ export function Aurora({ intensity = "hero", className = "" }: AuroraProps) {
             "conic-gradient(from 210deg at 50% 0%, rgba(41,151,255,0.05), transparent 30%)",
           maskImage: "linear-gradient(to bottom, black 55%, transparent)",
           WebkitMaskImage: "linear-gradient(to bottom, black 55%, transparent)",
+          opacity: hero ? 1 : 0.5,
         }}
       />
 
       {/* drifting orbs */}
-      {orbs.map((o, i) => (
-        <div
-          key={i}
-          className="aurora-orb absolute rounded-full"
-          style={{
-            top: "top" in o ? o.top : undefined,
-            bottom: "bottom" in o ? o.bottom : undefined,
-            left: "left" in o ? o.left : undefined,
-            right: "right" in o ? o.right : undefined,
-            width: o.size,
-            height: o.size,
-            background: `radial-gradient(circle at 50% 50%, ${o.fill}, transparent 70%)`,
-            filter: "blur(90px)",
-            opacity: hero ? 0.55 : 0.3,
-            animationDuration: o.duration,
-            animationDelay: o.delay,
-          }}
-        />
-      ))}
+      {orbs.map((o, i) => {
+        // Soft (ambient) usage drops the warm orb to avoid a muddy glow.
+        if (!hero && i === 2) return null;
+        return (
+          <div
+            key={i}
+            className="aurora-orb absolute rounded-full"
+            style={{
+              top: "top" in o ? o.top : undefined,
+              bottom: "bottom" in o ? o.bottom : undefined,
+              left: "left" in o ? o.left : undefined,
+              right: "right" in o ? o.right : undefined,
+              width: o.size,
+              height: o.size,
+              background: `radial-gradient(circle at 50% 50%, ${o.fill}, transparent 70%)`,
+              filter: "blur(90px)",
+              opacity: hero ? 0.5 : 0.16,
+              animationDuration: o.duration,
+              animationDelay: o.delay,
+            }}
+          />
+        );
+      })}
 
       {/* film grain */}
       <div className="grain" />
