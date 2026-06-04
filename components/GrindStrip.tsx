@@ -7,8 +7,8 @@ const items = [
 
 export function GrindStrip() {
   return (
-    <div className="bg-[var(--dark)] text-white">
-      <div className="mx-auto flex w-full max-w-[1200px] flex-wrap items-center justify-center gap-x-9 gap-y-3 px-6 py-5 text-[14.5px] text-white/80 sm:px-8">
+    <div className="border-y border-[var(--line-soft)] bg-[var(--bg-soft)]">
+      <div className="mx-auto flex w-full max-w-[1200px] flex-wrap items-center justify-center gap-x-9 gap-y-3 px-6 py-5 text-[14.5px] text-[var(--ink-soft)] sm:px-8">
         {items.map((it, i) => (
           <span key={i} className="inline-flex items-center gap-[10px]">
             <span aria-hidden="true" className="text-[var(--warm)]">
@@ -16,7 +16,7 @@ export function GrindStrip() {
             </span>
             <span>
               {it.lead}
-              <b className="font-medium text-white">{it.bold}</b>
+              <b className="font-medium text-[var(--ink)]">{it.bold}</b>
               {it.rest}
             </span>
           </span>

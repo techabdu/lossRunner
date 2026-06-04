@@ -8,11 +8,11 @@ const base =
 
 const variants: Record<Variant, string> = {
   primary:
-    "bg-[var(--accent)] text-white hover:bg-[var(--accent-hover)] hover:-translate-y-px shadow-[0_1px_2px_rgba(0,0,0,0.04)] hover:shadow-[0_10px_24px_-12px_rgba(0,113,227,0.55)]",
+    "bg-[var(--accent)] text-white hover:bg-[var(--accent-hover)] hover:-translate-y-px shadow-[0_2px_8px_-2px_var(--accent-glow)] hover:shadow-[var(--shadow-glow)]",
   ghost:
-    "border border-[var(--ink)] text-[var(--ink)] bg-transparent hover:bg-[var(--ink)] hover:text-white",
+    "border border-[var(--line)] text-[var(--ink)] bg-transparent hover:bg-white/[0.06] hover:border-[var(--ink-soft)]",
   dark:
-    "bg-[var(--ink)] text-white hover:bg-black hover:-translate-y-px",
+    "bg-white/[0.06] text-[var(--ink)] border border-[var(--line-soft)] backdrop-blur hover:bg-white/10 hover:-translate-y-px",
 };
 
 const sizes: Record<Size, string> = {

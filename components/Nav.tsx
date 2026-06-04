@@ -4,7 +4,7 @@ import { CALENDLY_URL } from "@/lib/env";
 
 export function Nav() {
   return (
-    <nav className="sticky top-0 z-50 border-b border-[var(--line-soft)] bg-white/75 backdrop-blur-xl backdrop-saturate-150">
+    <nav className="sticky top-0 z-50 border-b border-[var(--line-soft)] bg-black/60 backdrop-blur-xl backdrop-saturate-150">
       <Container>
         <div className="flex h-[64px] items-center justify-between">
           <a

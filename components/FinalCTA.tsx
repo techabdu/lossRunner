@@ -4,6 +4,8 @@ import { useState, FormEvent } from "react";
 import { Container } from "./ui/Container";
 import { Button } from "./ui/Button";
 import { Kicker } from "./ui/Kicker";
+import { Aurora } from "./ui/Aurora";
+import { Reveal } from "./ui/Reveal";
 import { CALENDLY_URL } from "@/lib/env";
 
 type Status = "idle" | "submitting" | "success" | "error";
@@ -48,22 +50,25 @@ export function FinalCTA() {
   return (
     <section
       aria-labelledby="final-h"
-      className="py-24 text-center sm:py-32"
+      className="relative overflow-hidden py-24 text-center sm:py-32"
     >
-      <Container>
-        <Kicker tone="warm" className="!mb-3">
-          Founding partners
-        </Kicker>
-        <h2
-          id="final-h"
-          className="mx-auto max-w-[20ch] text-[clamp(28px,4.6vw,48px)] font-semibold leading-[1.08] tracking-[-0.025em] text-[var(--ink)]"
-        >
-          Tell us how you chase loss runs today.
-        </h2>
-        <p className="mx-auto mt-5 max-w-[58ch] text-[18px] leading-[1.55] text-[var(--ink-soft)]">
-          We&apos;re picking a handful of agencies to build alongside. Early
-          partners get founding pricing and a direct line into the roadmap.
-        </p>
+      <Aurora intensity="soft" />
+      <Container className="relative z-10">
+        <Reveal>
+          <Kicker tone="warm" className="!mb-3">
+            Founding partners
+          </Kicker>
+          <h2
+            id="final-h"
+            className="mx-auto max-w-[20ch] text-[clamp(28px,4.6vw,48px)] font-semibold leading-[1.08] tracking-[-0.025em] text-[var(--ink)]"
+          >
+            Tell us how you chase loss runs today.
+          </h2>
+          <p className="mx-auto mt-5 max-w-[58ch] text-[18px] leading-[1.55] text-[var(--ink-soft)]">
+            We&apos;re picking a handful of agencies to build alongside. Early
+            partners get founding pricing and a direct line into the roadmap.
+          </p>
+        </Reveal>
 
         <form
           onSubmit={onSubmit}
@@ -83,7 +88,7 @@ export function FinalCTA() {
             onChange={(e) => setEmail(e.target.value)}
             placeholder="you@youragency.com"
             aria-describedby="form-status"
-            className="min-w-[220px] flex-1 rounded-full border border-[var(--line)] bg-white px-5 py-[13px] text-[16px] text-[var(--ink)] placeholder:text-[var(--ink-faint)] outline-none transition-colors focus:border-[var(--accent)]"
+            className="min-w-[220px] flex-1 rounded-full border border-[var(--line)] bg-[var(--bg-card)] px-5 py-[13px] text-[16px] text-[var(--ink)] placeholder:text-[var(--ink-faint)] outline-none transition-all focus:border-[var(--accent)] focus:shadow-[var(--shadow-glow)]"
           />
           <Button
             type="submit"
@@ -101,7 +106,7 @@ export function FinalCTA() {
             status === "error"
               ? "text-[var(--warm)]"
               : status === "success"
-              ? "text-[var(--accent-deep)]"
+              ? "text-[var(--accent)]"
               : "text-[var(--ink-faint)]"
           }`}
         >

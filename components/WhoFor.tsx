@@ -1,5 +1,6 @@
 import { Container } from "./ui/Container";
 import { Kicker } from "./ui/Kicker";
+import { Reveal } from "./ui/Reveal";
 
 const bullets = [
   "Independent & small commercial P&C agencies",
@@ -13,7 +14,7 @@ export function WhoFor() {
     <section aria-labelledby="who-h" className="py-20 sm:py-28">
       <Container>
         <div className="grid items-start gap-14 md:grid-cols-[1.1fr_0.9fr]">
-          <div>
+          <Reveal>
             <Kicker>Who it&apos;s for</Kicker>
             <h2
               id="who-h"
@@ -35,19 +36,21 @@ export function WhoFor() {
                 </li>
               ))}
             </ul>
-          </div>
-          <aside className="rounded-r-[var(--r-card)] border border-[var(--line-soft)] border-l-[4px] border-l-[var(--warm)] bg-[var(--bg-muted)] p-7 sm:p-8">
-            <p className="text-[21px] font-medium leading-[1.32] tracking-[-0.015em] text-[var(--ink)]">
-              “The process is so time-consuming, people just end up not doing it
-              well.”
-            </p>
-            <p className="mt-4 text-[15.5px] leading-[1.55] text-[var(--ink-soft)]">
-              We&apos;ve heard a version of this from every agency we&apos;ve
-              talked to. If it sounds like your Mondays, we&apos;d like 15
-              minutes to hear how you handle it today — whether or not you ever
-              use what we build.
-            </p>
-          </aside>
+          </Reveal>
+          <Reveal delay={0.1}>
+            <aside className="rounded-r-[var(--r-card)] border border-[var(--line-soft)] border-l-[4px] border-l-[var(--warm)] bg-[var(--bg-card)] p-7 shadow-[var(--shadow-card)] sm:p-8">
+              <p className="text-[21px] font-medium leading-[1.32] tracking-[-0.015em] text-[var(--ink)]">
+                “The process is so time-consuming, people just end up not doing
+                it well.”
+              </p>
+              <p className="mt-4 text-[15.5px] leading-[1.55] text-[var(--ink-soft)]">
+                We&apos;ve heard a version of this from every agency we&apos;ve
+                talked to. If it sounds like your Mondays, we&apos;d like 15
+                minutes to hear how you handle it today — whether or not you ever
+                use what we build.
+              </p>
+            </aside>
+          </Reveal>
         </div>
       </Container>
     </section>

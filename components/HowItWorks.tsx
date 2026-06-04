@@ -1,5 +1,6 @@
 import { Container } from "./ui/Container";
 import { Kicker } from "./ui/Kicker";
+import { Reveal } from "./ui/Reveal";
 
 type Step = { idx: string; h: string; p: string; tag?: string };
 
@@ -40,17 +41,21 @@ export function HowItWorks() {
       className="bg-[var(--bg-muted)] py-20 sm:py-28"
     >
       <Container>
-        <Kicker>How it works</Kicker>
-        <h2
-          id="how-h"
-          className="max-w-[22ch] text-[clamp(28px,4.2vw,44px)] font-semibold leading-[1.08] tracking-[-0.02em] text-[var(--ink)]"
-        >
-          One agent runs the whole errand, start to finish.
-        </h2>
+        <Reveal>
+          <Kicker>How it works</Kicker>
+          <h2
+            id="how-h"
+            className="max-w-[22ch] text-[clamp(28px,4.2vw,44px)] font-semibold leading-[1.08] tracking-[-0.02em] text-[var(--ink)]"
+          >
+            One agent runs the whole errand, start to finish.
+          </h2>
+        </Reveal>
         <ol className="mt-12">
           {steps.map((s, i) => (
-            <li
+            <Reveal
+              as="li"
               key={s.idx}
+              delay={i * 0.06}
               className={`grid grid-cols-[48px_1fr] gap-5 border-t border-[var(--line)] py-7 sm:grid-cols-[72px_1fr] sm:gap-7 ${
                 i === steps.length - 1 ? "border-b" : ""
               }`}
@@ -66,12 +71,12 @@ export function HowItWorks() {
                   {s.p}
                 </p>
                 {s.tag && (
-                  <span className="mt-3 inline-block rounded-full bg-[var(--accent-tint)] px-3 py-[3px] text-[12.5px] font-medium text-[var(--accent-deep)]">
+                  <span className="mt-3 inline-block rounded-full border border-[var(--line-soft)] bg-[var(--accent-tint)] px-3 py-[3px] text-[12.5px] font-medium text-[var(--accent)]">
                     {s.tag}
                   </span>
                 )}
               </div>
-            </li>
+            </Reveal>
           ))}
         </ol>
       </Container>
