@@ -1,7 +1,7 @@
 import { Container } from "./ui/Container";
 import { ButtonLink, ArrowLink } from "./ui/Button";
 import { Eyebrow } from "./ui/Eyebrow";
-import { InboxMock } from "./ui/InboxMock";
+import { HeroProduct } from "./ui/HeroProduct";
 import { Reveal } from "./ui/Reveal";
 import { CALENDLY_URL } from "@/lib/env";
 
@@ -48,8 +48,8 @@ export function Hero() {
         </Reveal>
 
         {/* Product, centered and large — the hero is the product */}
-        <Reveal delay={0.2} className="mx-auto mt-16 max-w-[680px] sm:mt-20">
-          <InboxMock />
+        <Reveal delay={0.2}>
+          <HeroProduct />
         </Reveal>
       </Container>
     </header>

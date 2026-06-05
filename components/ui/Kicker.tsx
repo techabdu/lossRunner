@@ -12,6 +12,6 @@ export function Kicker({
   className?: string;
 }) {
   const color =
-    tone === "onDark" ? "text-[var(--dark-link)]" : "text-[var(--accent)]";
+    tone === "onDark" ? "text-[var(--dark-link)]" : "text-[var(--link)]";
   return <p className={`t-overline mb-3 ${color} ${className}`}>{children}</p>;
 }

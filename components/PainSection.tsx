@@ -12,8 +12,8 @@ const cards = [
     p: "The typical wait, full of follow-ups. The single slowest step in prepping a renewal submission.",
   },
   {
-    n: "$0",
-    p: "Spent on software for this today. It’s a human suspense list and a lot of “just circling back.”",
+    n: "Zero",
+    p: "Purpose-built software your team has for this today. It’s a human suspense list and a lot of “just circling back.”",
   },
 ];
 

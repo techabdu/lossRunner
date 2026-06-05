@@ -13,8 +13,8 @@
      Never pure black on white — Apple sets text at #1d1d1f and
      steps down through two grays. #86868b is the Apple gray. */
   --ink: #1d1d1f;
-  --ink-soft: #6e6e73;
-  --ink-faint: #86868b;
+  --ink-soft: #515154; /* secondary — ~7.5:1 on white */
+  --ink-faint: #6e6e73; /* tertiary — ~5:1, passes WCAG AA */
 
   /* ── Hairlines ──────────────────────────────────────────────── */
   --line: rgba(0, 0, 0, 0.13);

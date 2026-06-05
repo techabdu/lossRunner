@@ -1,5 +1,6 @@
 import type { Metadata, Viewport } from "next";
 import { Inter } from "next/font/google";
+import { SITE_URL } from "@/lib/env";
 import "./globals.css";
 
 const inter = Inter({
@@ -9,6 +10,7 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL(SITE_URL),
   title: "LossRunner by HAQ — stop chasing carriers for loss runs",
   description:
     "LossRunner runs the loss-run errand on its own — from request to filed report — so account managers stop babysitting carrier inboxes.",

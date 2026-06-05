@@ -10,6 +10,6 @@ export function Eyebrow({
   className?: string;
 }) {
   return (
-    <p className={`t-overline text-[var(--accent)] ${className}`}>{children}</p>
+    <p className={`t-overline text-[var(--link)] ${className}`}>{children}</p>
   );
 }
