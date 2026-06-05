@@ -1,6 +1,5 @@
 import { Nav } from "@/components/Nav";
 import { Hero } from "@/components/Hero";
-import { GrindStrip } from "@/components/GrindStrip";
 import { PainSection } from "@/components/PainSection";
 import { HowItWorks } from "@/components/HowItWorks";
 import { ReturnBand } from "@/components/ReturnBand";
@@ -14,7 +13,6 @@ export default function Home() {
       <Nav />
       <main>
         <Hero />
-        <GrindStrip />
         <PainSection />
         <HowItWorks />
         <ReturnBand />

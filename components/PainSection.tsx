@@ -34,7 +34,8 @@ export function PainSection() {
             Loss-run retrieval is invisible until it&apos;s late — and then it
             stalls a quote, annoys a producer, and puts a renewal at risk.
             It&apos;s the kind of work that&apos;s too fiddly to standardize and
-            too constant to ignore.
+            too constant to ignore — and at roughly 36,000 US agencies,
+            it&apos;s still done by hand.
           </p>
         </Reveal>
         <div className="mt-12 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
