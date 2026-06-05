@@ -3,21 +3,22 @@ import { ButtonHTMLAttributes, AnchorHTMLAttributes, ReactNode } from "react";
 type Variant = "primary" | "ghost" | "dark";
 type Size = "md" | "sm";
 
+/* Apple controls are calm: a pill that shifts background a half-step
+   on hover. No lift, no scale, no colored glow. */
 const base =
-  "btn-pill inline-flex items-center justify-center gap-2 font-medium rounded-full transition-all duration-200 ease-out select-none";
+  "btn-pill inline-flex items-center justify-center gap-2 font-medium rounded-full transition-colors duration-200 ease-out select-none";
 
 const variants: Record<Variant, string> = {
-  primary:
-    "bg-[var(--accent)] text-white hover:bg-[var(--accent-hover)] hover:-translate-y-px shadow-[0_2px_8px_-2px_var(--accent-glow)] hover:shadow-[var(--shadow-glow)]",
+  primary: "bg-[var(--accent)] text-white hover:bg-[var(--accent-hover)]",
   ghost:
-    "border border-[var(--line)] text-[var(--ink)] bg-transparent hover:bg-white/[0.06] hover:border-[var(--ink-soft)]",
-  dark:
-    "bg-white/[0.06] text-[var(--ink)] border border-[var(--line-soft)] backdrop-blur hover:bg-white/10 hover:-translate-y-px",
+    "border border-[var(--line)] text-[var(--ink)] bg-transparent hover:bg-black/[0.04]",
+  // For use on the dark band: white control on near-black.
+  dark: "bg-white text-[#1d1d1f] hover:bg-[#f5f5f7]",
 };
 
 const sizes: Record<Size, string> = {
-  md: "text-[15px] px-5 py-[11px]",
-  sm: "text-[14px] px-[18px] py-[9px]",
+  md: "text-[17px] px-[22px] py-[12px]",
+  sm: "text-[14px] px-[16px] py-[8px]",
 };
 
 export function ButtonLink({
@@ -62,5 +63,37 @@ export function Button({
     >
       {children}
     </button>
+  );
+}
+
+/* The Apple signature secondary action: a blue text link with a
+   chevron that nudges right on hover. `tone="onDark"` for the band. */
+export function ArrowLink({
+  href,
+  tone = "light",
+  className = "",
+  children,
+  ...rest
+}: {
+  href: string;
+  tone?: "light" | "onDark";
+  children: ReactNode;
+} & Omit<AnchorHTMLAttributes<HTMLAnchorElement>, "href">) {
+  const color =
+    tone === "onDark" ? "text-[var(--dark-link)]" : "text-[var(--link)]";
+  return (
+    <a
+      href={href}
+      className={`group inline-flex items-center gap-1 text-[17px] underline-offset-4 transition-colors hover:underline ${color} ${className}`}
+      {...rest}
+    >
+      {children}
+      <span
+        aria-hidden="true"
+        className="transition-transform duration-200 ease-out group-hover:translate-x-[3px]"
+      >
+        ›
+      </span>
+    </a>
   );
 }

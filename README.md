@@ -1,8 +1,10 @@
 # LossRunner — marketing landing page
 
 Next.js (App Router) + Tailwind v4 + TypeScript rebuild of the
-`reference/lossrunner-landing.html` design, redone in an Apple-inspired
-visual language (white, Inter, generous whitespace, hairline separators).
+`reference/lossrunner-landing.html` design, redone in the apple.com
+visual language: a light surface (white + `#f5f5f7`), SF Pro type on a
+closed ramp, an 8-pt grid, hairline separators, restrained motion, and a
+single cinematic dark band for rhythm.
 
 ## Run locally
 
@@ -42,14 +44,14 @@ Creates the `early_access` table (`id`, `email` UNIQUE, `ip`,
 
 ```
 app/
-  layout.tsx                  # Inter font + metadata
+  layout.tsx                  # SF Pro stack (Inter fallback) + metadata
   page.tsx                    # composes the section components
-  globals.css                 # design tokens + reveal animations
+  globals.css                 # design tokens, type ramp + reveal animation
   api/early-access/route.ts   # form POST handler
 components/
-  Nav · Hero · GrindStrip · PainSection · HowItWorks
-  ReturnBand · WhoFor · FinalCTA · Footer
-  ui/ Button · Container · Eyebrow · Kicker
+  Nav · Hero · PainSection · HowItWorks
+  ReturnBand (the dark band) · WhoFor · FinalCTA · Footer
+  ui/ Button (+ ArrowLink) · Container · Eyebrow · Kicker · Reveal · InboxMock
 lib/
   db.ts                       # mysql2 pool (lazy, optional)
   env.ts                      # CALENDLY_URL, CONTACT_EMAIL

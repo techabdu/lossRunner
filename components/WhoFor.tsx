@@ -11,22 +11,23 @@ const bullets = [
 
 export function WhoFor() {
   return (
-    <section aria-labelledby="who-h" className="py-20 sm:py-28">
+    <section
+      id="who"
+      aria-labelledby="who-h"
+      className="bg-[var(--bg-muted)] py-24 sm:py-32"
+    >
       <Container>
-        <div className="grid items-start gap-14 md:grid-cols-[1.1fr_0.9fr]">
+        <div className="grid items-start gap-12 md:grid-cols-[1.1fr_0.9fr] md:gap-14">
           <Reveal>
-            <Kicker>Who it&apos;s for</Kicker>
-            <h2
-              id="who-h"
-              className="max-w-[22ch] text-[clamp(28px,4.2vw,44px)] font-semibold leading-[1.08] tracking-[-0.02em] text-[var(--ink)]"
-            >
+            <Kicker>Who it&rsquo;s for</Kicker>
+            <h2 id="who-h" className="t-headline max-w-[20ch] text-[var(--ink)]">
               Built for the agencies the big platforms ignore.
             </h2>
             <ul className="mt-7">
               {bullets.map((b) => (
                 <li
                   key={b}
-                  className="flex gap-3 border-b border-[var(--line-soft)] py-[14px] text-[16.5px] leading-[1.5] text-[var(--ink)]"
+                  className="flex gap-3 border-b border-[var(--line-soft)] py-4 text-[17px] leading-[1.5] text-[var(--ink)]"
                 >
                   <span
                     aria-hidden="true"
@@ -38,16 +39,15 @@ export function WhoFor() {
             </ul>
           </Reveal>
           <Reveal delay={0.1}>
-            <aside className="rounded-r-[var(--r-card)] border border-[var(--line-soft)] border-l-[4px] border-l-[var(--warm)] bg-[var(--bg-card)] p-7 shadow-[var(--shadow-card)] sm:p-8">
-              <p className="text-[21px] font-medium leading-[1.32] tracking-[-0.015em] text-[var(--ink)]">
-                “The process is so time-consuming, people just end up not doing
-                it well.”
+            <aside className="rounded-[var(--r-lg)] border border-[var(--line-soft)] bg-[var(--bg-card)] p-8 shadow-[var(--shadow-sm)]">
+              <p className="t-title font-medium text-[var(--ink)]">
+                &ldquo;The process is so time-consuming, people just end up not
+                doing it well.&rdquo;
               </p>
-              <p className="mt-4 text-[15.5px] leading-[1.55] text-[var(--ink-soft)]">
-                We&apos;ve heard a version of this from every agency we&apos;ve
-                talked to. If it sounds like your Mondays, we&apos;d like 15
-                minutes to hear how you handle it today — whether or not you ever
-                use what we build.
+              <p className="mt-4 text-[15px] leading-[1.5] text-[var(--ink-soft)]">
+                We&rsquo;ve heard a version of this from every agency we&rsquo;ve
+                talked to. If it sounds like your Mondays, give us 15
+                minutes&mdash;whether or not you ever use what we build.
               </p>
             </aside>
           </Reveal>

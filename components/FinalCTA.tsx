@@ -4,7 +4,6 @@ import { useState, FormEvent } from "react";
 import { Container } from "./ui/Container";
 import { Button } from "./ui/Button";
 import { Kicker } from "./ui/Kicker";
-import { Aurora } from "./ui/Aurora";
 import { Reveal } from "./ui/Reveal";
 import { CALENDLY_URL } from "@/lib/env";
 
@@ -39,7 +38,7 @@ export function FinalCTA() {
       }
 
       setStatus("success");
-      setMsg("Thanks — we'll be in touch shortly.");
+      setMsg("Thanks — we’ll be in touch shortly.");
       setEmail("");
     } catch {
       setStatus("error");
@@ -50,22 +49,19 @@ export function FinalCTA() {
   return (
     <section
       aria-labelledby="final-h"
-      className="relative overflow-hidden py-24 text-center sm:py-32"
+      className="py-28 text-center sm:py-32"
     >
-      <Aurora intensity="soft" />
-      <Container className="relative z-10">
+      <Container>
         <Reveal>
-          <Kicker tone="warm" className="!mb-3">
-            Founding partners
-          </Kicker>
+          <Kicker className="!mb-3">Founding partners</Kicker>
           <h2
             id="final-h"
-            className="mx-auto max-w-[20ch] text-[clamp(28px,4.6vw,48px)] font-semibold leading-[1.08] tracking-[-0.025em] text-[var(--ink)]"
+            className="t-headline mx-auto max-w-[20ch] text-[var(--ink)]"
           >
             Tell us how you chase loss runs today.
           </h2>
-          <p className="mx-auto mt-5 max-w-[58ch] text-[18px] leading-[1.55] text-[var(--ink-soft)]">
-            We&apos;re picking a handful of agencies to build alongside. Early
+          <p className="t-lede mx-auto mt-5 max-w-[56ch] text-[var(--ink-soft)]">
+            We&rsquo;re picking a handful of agencies to build alongside. Early
             partners get founding pricing and a direct line into the roadmap.
           </p>
         </Reveal>
@@ -88,7 +84,7 @@ export function FinalCTA() {
             onChange={(e) => setEmail(e.target.value)}
             placeholder="you@youragency.com"
             aria-describedby="form-status"
-            className="min-w-[220px] flex-1 rounded-full border border-[var(--line)] bg-[var(--bg-card)] px-5 py-[13px] text-[16px] text-[var(--ink)] placeholder:text-[var(--ink-faint)] outline-none transition-all focus:border-[var(--accent)] focus:shadow-[var(--shadow-glow)]"
+            className="min-w-[220px] flex-1 rounded-full border border-[var(--line)] bg-white px-5 py-[13px] text-[17px] text-[var(--ink)] outline-none transition-all placeholder:text-[var(--ink-faint)] focus:border-[var(--accent)] focus:ring-4 focus:ring-[rgba(0,113,227,0.15)]"
           />
           <Button
             type="submit"
@@ -104,7 +100,7 @@ export function FinalCTA() {
           aria-live="polite"
           className={`mt-4 min-h-[1.4em] text-[14px] ${
             status === "error"
-              ? "text-[var(--warm)]"
+              ? "text-[var(--warn)]"
               : status === "success"
               ? "text-[var(--accent)]"
               : "text-[var(--ink-faint)]"
@@ -117,9 +113,9 @@ export function FinalCTA() {
           Rather just talk?{" "}
           <a
             href={CALENDLY_URL}
-            className="font-medium text-[var(--accent)] underline-offset-4 hover:underline"
+            className="font-medium text-[var(--link)] underline-offset-4 hover:underline"
           >
-            Book a 15-minute call →
+            Book a 15&#8209;minute call ›
           </a>
         </p>
       </Container>

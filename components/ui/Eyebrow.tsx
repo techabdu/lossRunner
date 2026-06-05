@@ -1,5 +1,7 @@
 import { ReactNode } from "react";
 
+/* A quiet, sentence-case accent line — Apple's intro overline, with
+   none of the tracked-out all-caps chrome of a B2B kicker. */
 export function Eyebrow({
   children,
   className = "",
@@ -8,14 +10,6 @@ export function Eyebrow({
   className?: string;
 }) {
   return (
-    <span
-      className={`inline-flex items-center gap-2 rounded-full border border-[var(--line-soft)] bg-[var(--accent-tint)] px-[14px] py-[6px] text-[13px] font-medium tracking-[0.01em] text-[var(--accent)] ${className}`}
-    >
-      <span
-        aria-hidden="true"
-        className="inline-block h-[7px] w-[7px] rounded-full bg-[var(--accent)]"
-      />
-      {children}
-    </span>
+    <p className={`t-overline text-[var(--accent)] ${className}`}>{children}</p>
   );
 }

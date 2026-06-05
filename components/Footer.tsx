@@ -4,15 +4,21 @@ import { CONTACT_EMAIL } from "@/lib/env";
 export function Footer() {
   const year = new Date().getFullYear();
   return (
-    <footer className="py-9">
+    <footer className="bg-[var(--bg)] py-12">
       <Container>
-        <div className="mb-9 h-px bg-gradient-to-r from-transparent via-[var(--line)] to-transparent" />
-        <div className="flex flex-wrap items-center justify-between gap-3 text-[13.5px] text-[var(--ink-faint)]">
-          <span>© {year} HAQ — LossRunner is a working name.</span>
+        <p className="max-w-[70ch] text-[12px] leading-[1.5] text-[var(--ink-faint)]">
+          LossRunner is a working name. It&rsquo;s an early-stage tool built with
+          and for independent insurance agencies; nothing here is a binding offer
+          of service. Carrier and company names are referenced for illustration
+          only.
+        </p>
+        <div className="my-6 h-px bg-[var(--line-soft)]" />
+        <div className="flex flex-wrap items-center justify-between gap-3 text-[12px] text-[var(--ink-faint)]">
+          <span>© {year} HAQ. All rights reserved.</span>
           <span>
             <a
               href={`mailto:${CONTACT_EMAIL}`}
-              className="hover:text-[var(--ink)]"
+              className="transition-colors hover:text-[var(--ink)]"
             >
               {CONTACT_EMAIL}
             </a>{" "}
